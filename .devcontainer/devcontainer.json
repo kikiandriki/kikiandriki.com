@@ -1,0 +1,22 @@
+{
+  "name": "kikiandriki.com",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "settings": {},
+  "extensions": [
+    "esbenp.prettier-vscode",
+    "csstools.postcss",
+    "bradlc.vscode-tailwindcss",
+    "dbaeumer.vscode-eslint",
+    "skyapps.fish-vscode"
+  ],
+  "forwardPorts": [3000],
+  "postCreateCommand": "npm i",
+  "remoteUser": "node",
+  "features": {
+    "git": "latest",
+    "git-lfs": "3.1.4",
+    "github-cli": "latest"
+  }
+}
