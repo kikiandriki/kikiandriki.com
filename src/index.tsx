@@ -69,10 +69,23 @@ function App() {
 function Private() {
   const { logout } = useAuth0()
   return (
-    <>
-      <p>This is private</p>
-      <button onClick={() => logout()}>Log out</button>
-    </>
+    <div className="min-h-screen flex flex-col justify-center items-center text-center">
+      <p>This is an example of a private page.</p>
+      <br />
+      <p>
+        This page is only accessible to viewers
+        <br />
+        who have logged in with Discord.
+      </p>
+      <br />
+      <p>
+        In the future,
+        <br />
+        this page will only be accessible to logged in users
+        <br />
+        who are also members of the server.
+      </p>
+    </div>
   )
 }
 

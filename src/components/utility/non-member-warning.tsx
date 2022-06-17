@@ -21,7 +21,7 @@ export function NonMemberWarning() {
       </h1>
       <button
         className="inline-flex items-center px-3 py-3 border border-transparent text-base font-medium rounded-2xl shadow-sm text-red-500 bg-red-100 hover:bg-red-500 hover:text-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-        onClick={() => logout()}
+        onClick={() => logout({ returnTo: window.location.origin })}
       >
         <LogoutIcon className="h-5 w-5" />
       </button>
