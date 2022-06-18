@@ -3,7 +3,7 @@
  */
 
 // External imports.
-import React, { ReactNode } from "react"
+import React from "react"
 import ReactDOM from "react-dom/client"
 import {
   useNavigate,
@@ -11,6 +11,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom"
+import { QueryClientProvider, QueryClient } from "react-query"
 import { Auth0Provider, useAuth0 } from "@auth0/auth0-react"
 
 // Component imports.
@@ -38,6 +39,8 @@ function App() {
       connection="discord"
       useRefreshTokens={true}
       cacheLocation="localstorage"
+      audience="kikiandriki"
+      scope="openid identify disque"
       onRedirectCallback={(state) => {
         navigate(state?.returnTo || window.location.pathname, { replace: true })
       }}
@@ -92,8 +95,10 @@ function Private() {
 // Render the application to DOM.
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <QueryClientProvider client={new QueryClient()}>
+      <Router>
+        <App />
+      </Router>
+    </QueryClientProvider>
   </React.StrictMode>,
 )

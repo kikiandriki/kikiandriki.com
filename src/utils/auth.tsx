@@ -10,6 +10,9 @@ import { useAuth0, User } from "@auth0/auth0-react"
 // Component imports.
 import { NonMemberWarning, Loading } from "@components/utility"
 
+// Utility imports.
+import { useMembership } from "@utils/api/disque"
+
 /**
  * Hook to get access to the user.
  */
@@ -21,30 +24,12 @@ export function useUser(): User {
 }
 
 /**
- * Hook to determine if a user is a server member.
- */
-export function useMembership(): { data?: boolean; isLoading: boolean } {
-  return {
-    data: true,
-    isLoading: false,
-  }
-}
-
-/**
  * Component wrapper to require auth.
  */
 export const RequireAuth = ({ children }: { children: ReactNode }) => {
   const { pathname } = useLocation()
   const auth = useAuth0()
   const membership = useMembership()
-  // Display loading if loading.
-  if (auth.isLoading || membership.isLoading) {
-    return (
-      <div className="min-h-screen flex items-stretch">
-        <Loading />
-      </div>
-    )
-  }
   // If the user is not authenticated, send them to the login.
   if (!auth.isAuthenticated) {
     return (
@@ -52,6 +37,14 @@ export const RequireAuth = ({ children }: { children: ReactNode }) => {
         <p>Please log in.</p>
         {auth.loginWithRedirect({ appState: { returnTo: pathname } })}
       </>
+    )
+  }
+  // Display loading if loading.
+  if (auth.isLoading || membership.isLoading) {
+    return (
+      <div className="min-h-screen flex items-stretch">
+        <Loading />
+      </div>
     )
   }
   // If the user is not a member, show the non-membership error.
