@@ -23,9 +23,9 @@ import { Link, useLocation } from "react-router-dom"
 const navigation = [
   { name: "Dashboard", href: "/", matcher: /^\/?$/ },
   {
-    name: "Private",
-    href: "/private",
-    matcher: /^\/private($|\/.*)/,
+    name: "Members",
+    href: "/members",
+    matcher: /^\/members($|\/.*)/,
   },
 ]
 
@@ -43,8 +43,8 @@ export function Shell({ children }: { children?: ReactNode }) {
     )
   }
   return (
-    <>
-      <Disclosure as="nav" className="bg-white shadow-sm fixed w-full">
+    <div className="h-screen flex flex-col relative">
+      <Disclosure as="nav" className="bg-white shadow-sm z-30">
         {({ open }) => (
           <>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -221,7 +221,7 @@ export function Shell({ children }: { children?: ReactNode }) {
         )}
       </Disclosure>
 
-      <>{children}</>
-    </>
+      <div className="h-full z-0 flex-1 overflow-scroll">{children}</div>
+    </div>
   )
 }

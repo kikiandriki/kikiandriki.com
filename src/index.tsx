@@ -12,7 +12,10 @@ import {
   Route,
 } from "react-router-dom"
 import { QueryClientProvider, QueryClient } from "react-query"
-import { Auth0Provider, useAuth0 } from "@auth0/auth0-react"
+import { Auth0Provider } from "@auth0/auth0-react"
+
+// Page imports.
+import { Members } from "@pages/members"
 
 // Component imports.
 import { Shell } from "@components/utility"
@@ -50,45 +53,22 @@ function App() {
           <Route
             path="/"
             element={
-              <div className="min-h-screen flex flex-col justify-center items-center">
+              <div className="h-full flex flex-col justify-center items-center">
                 <p className="text-xl">{motd}</p>
               </div>
             }
           />
           <Route
-            path="/private"
+            path="/members"
             element={
               <RequireAuth>
-                <Private />
+                <Members />
               </RequireAuth>
             }
           />
         </Routes>
       </Shell>
     </Auth0Provider>
-  )
-}
-
-function Private() {
-  const { logout } = useAuth0()
-  return (
-    <div className="min-h-screen flex flex-col justify-center items-center text-center">
-      <p>This is an example of a private page.</p>
-      <br />
-      <p>
-        This page is only accessible to viewers
-        <br />
-        who have logged in with Discord.
-      </p>
-      <br />
-      <p>
-        In the future,
-        <br />
-        this page will only be accessible to logged in users
-        <br />
-        who are also members of the server.
-      </p>
-    </div>
   )
 }
 

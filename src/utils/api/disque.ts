@@ -35,3 +35,48 @@ export function useMembership() {
     return response.data
   })
 }
+
+/**
+ * Hook to list server members.
+ */
+interface DiscordMember {
+  user: {
+    id: string
+    username: string
+    discriminator: string
+    avatar: string | null
+    bot?: boolean
+    system?: boolean
+    mfa_enabled?: boolean
+    banner?: string | null
+    accent_color?: number | null
+    locale?: string
+    verified?: boolean
+    email?: string | null
+    flags?: number
+    premium_type?: number
+    public_flags?: number
+  }
+  nick?: string | null
+  avatar?: string | null
+  roles: string[]
+  joined_at: string
+  premium_since?: string | null
+  deaf: boolean
+  mute: boolean
+  pending?: boolean
+  permissions?: string
+  communication_disabled_until?: string | null
+}
+export function useMembers() {
+  const { getAccessTokenSilently } = useAuth0()
+  return useQuery("members", async () => {
+    const token = await getAccessTokenSilently()
+    const response = await disque.get<DiscordMember[]>("/members", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return response.data
+  })
+}

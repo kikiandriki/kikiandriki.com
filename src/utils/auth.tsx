@@ -42,7 +42,7 @@ export const RequireAuth = ({ children }: { children: ReactNode }) => {
   // Display loading if loading.
   if (auth.isLoading || membership.isLoading) {
     return (
-      <div className="min-h-screen flex items-stretch">
+      <div className="h-full flex items-stretch">
         <Loading />
       </div>
     )
@@ -50,7 +50,7 @@ export const RequireAuth = ({ children }: { children: ReactNode }) => {
   // If the user is not a member, show the non-membership error.
   if (!membership.data) {
     return (
-      <div className="min-h-screen flex items-stretch">
+      <div className="h-full flex items-stretch">
         <NonMemberWarning />
       </div>
     )
