@@ -15,30 +15,7 @@ export const disque = axiosBase.create({
   },
 })
 
-/**
- * Hook to determine if a user is a server member.
- */
-export function useMembership() {
-  const { getAccessTokenSilently } = useAuth0()
-  return useQuery("membership", async () => {
-    const token = await getAccessTokenSilently()
-    const response = await disque.get<boolean>("/@member", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      validateStatus: null,
-    })
-    if (response.status !== 200) {
-      console.log(response)
-      return false
-    }
-    return response.data
-  })
-}
-
-/**
- * Hook to list server members.
- */
+// Interface for a discord member object.
 interface DiscordMember {
   user: {
     id: string
@@ -68,6 +45,31 @@ interface DiscordMember {
   permissions?: string
   communication_disabled_until?: string | null
 }
+
+/**
+ * Hook to determine if a user is a server member.
+ */
+export function useMembership() {
+  const { getAccessTokenSilently } = useAuth0()
+  return useQuery("membership", async () => {
+    const token = await getAccessTokenSilently()
+    const response = await disque.get<boolean>("/@member", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      validateStatus: null,
+    })
+    if (response.status !== 200) {
+      console.log(response)
+      return false
+    }
+    return response.data
+  })
+}
+
+/**
+ * Hook to list server members.
+ */
 export function useMembers() {
   const { getAccessTokenSilently } = useAuth0()
   return useQuery("members", async () => {
@@ -77,6 +79,26 @@ export function useMembers() {
         Authorization: `Bearer ${token}`,
       },
     })
+    return response.data
+  })
+}
+
+/**
+ * Hook to get one server member.
+ */
+export function useMember(id: string) {
+  const { getAccessTokenSilently } = useAuth0()
+  return useQuery(`member-${id}`, async () => {
+    const token = await getAccessTokenSilently()
+    const response = await disque.get<DiscordMember>(`/members/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      validateStatus: null,
+    })
+    if (response.status === 404) {
+      return
+    }
     return response.data
   })
 }

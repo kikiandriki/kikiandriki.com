@@ -22,11 +22,11 @@ import { Link, useLocation } from "react-router-dom"
 
 const navigation = [
   { name: "Dashboard", href: "/", matcher: /^\/?$/ },
-  {
-    name: "Members",
-    href: "/members",
-    matcher: /^\/members($|\/.*)/,
-  },
+  // {
+  //   name: "Members",
+  //   href: "/members",
+  //   matcher: /^\/members($|\/.*)/,
+  // },
 ]
 
 /**

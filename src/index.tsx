@@ -15,7 +15,7 @@ import { QueryClientProvider, QueryClient } from "react-query"
 import { Auth0Provider } from "@auth0/auth0-react"
 
 // Page imports.
-import { Members } from "@pages/members"
+import Member from "@pages/members/member"
 
 // Component imports.
 import { Shell } from "@components/utility"
@@ -59,10 +59,10 @@ function App() {
             }
           />
           <Route
-            path="/members"
+            path="/users/:userId"
             element={
               <RequireAuth>
-                <Members />
+                <Member />
               </RequireAuth>
             }
           />
