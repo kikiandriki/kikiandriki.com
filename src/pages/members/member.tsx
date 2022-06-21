@@ -39,7 +39,7 @@ export default function Member() {
               data.user.id,
               data.avatar || data.user.avatar,
               data.user.discriminator,
-              true,
+              !!data.avatar,
             )}
           />
         </div>
