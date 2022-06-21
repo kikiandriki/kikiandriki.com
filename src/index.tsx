@@ -43,7 +43,7 @@ function App() {
       useRefreshTokens={true}
       cacheLocation="localstorage"
       audience="kikiandriki"
-      scope="openid identify disque"
+      scope="openid identify offline_access disque ladder"
       onRedirectCallback={(state) => {
         navigate(state?.returnTo || window.location.pathname, { replace: true })
       }}
