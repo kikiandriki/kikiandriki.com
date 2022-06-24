@@ -38,6 +38,7 @@ jobs:
         run: npm run build
         env:
           KIKI_DISQUE_BASE_URL: https://8388cqzgvl.execute-api.us-east-1.amazonaws.com/prod
+          KIKI_LADDER_BASE_URL: https://qd8d4ani7h.execute-api.us-east-1.amazonaws.com/prod
 
       - name: Deploy
         env:

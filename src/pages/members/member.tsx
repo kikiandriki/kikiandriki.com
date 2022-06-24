@@ -11,6 +11,7 @@ import { Loading } from "@components/utility"
 // Utility imports.
 import { useMember } from "@utils/api/disque"
 import { getAvatarUrl } from "@utils/discord"
+import { LadderProfile } from "@components/profile/ladder"
 
 export default function Member() {
   const { userId } = useParams<{ userId: string }>()
@@ -52,7 +53,7 @@ export default function Member() {
           </span>
         </div>
         <div className="py-4 px-4 text-gray-700">
-          <p>More information will be incuded soon.</p>
+          <LadderProfile userId={data.user.id} />
         </div>
       </div>
     </div>
