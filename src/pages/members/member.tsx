@@ -7,11 +7,12 @@ import { useParams } from "react-router-dom"
 
 // Component imports.
 import { Loading } from "@components/utility"
+import { LadderProfile } from "@components/profile/ladder"
+import { GuestbookComments } from "@components/profile/guestbook"
 
 // Utility imports.
 import { useMember } from "@utils/api/disque"
 import { getAvatarUrl } from "@utils/discord"
-import { LadderProfile } from "@components/profile/ladder"
 
 export default function Member() {
   const { userId } = useParams<{ userId: string }>()
@@ -32,7 +33,7 @@ export default function Member() {
 
   return (
     <div className="mx-2">
-      <div className="mt-10 max-w-xl mx-auto rounded-2xl shadow-md border border-black border-opacity-5 overflow-hidden">
+      <div className="my-10 max-w-xl mx-auto rounded-2xl shadow-md border border-black border-opacity-5 overflow-hidden">
         <div className="bg-gray-200 px-4 py-4 flex justify-center items-center">
           <img
             className="rounded-full border-white border-2 shadow-sm h-32"
@@ -49,11 +50,14 @@ export default function Member() {
             {data.nick || data.user.username}
           </h1>
           <span className="text-sm font-semibold uppercase text-gray-500">
-            {data.user.username}#{data.user.discriminator}
+            {data.user.username}
           </span>
         </div>
         <div className="py-4 px-4 text-gray-700">
           <LadderProfile userId={data.user.id} />
+        </div>
+        <div className="py-4 px-4 text-gray-700">
+          <GuestbookComments userId={data.user.id} />
         </div>
       </div>
     </div>
