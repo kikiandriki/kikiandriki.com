@@ -62,8 +62,8 @@ function GuestbookComment({
   content,
   published,
 }: GuestbookCommentProps) {
-  const { data } = useMember(authorId)
-  if (!data) {
+  const { data, isLoading } = useMember(authorId)
+  if (isLoading) {
     return (
       <div className="relative flex items-start space-x-3 animate-pulse p-2 sm:p-4">
         <div className="relative">
@@ -84,44 +84,47 @@ function GuestbookComment({
       </div>
     )
   }
-  return (
-    <div className="relative flex items-start space-x-3 p-2 sm:p-4">
-      <div className="relative">
-        <Link to={`/users/${data.user.id}`}>
-          <img
-            className={classNames(
-              data ? "" : "animate-pulse",
-              "h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white",
-            )}
-            src={getAvatarUrl(
-              data.user.id,
-              data.user.avatar,
-              data.user.discriminator,
-            )}
-            alt=""
-          />
-        </Link>
-      </div>
-      <div className="min-w-0 flex-1">
-        <div>
-          <div className="text-sm">
-            <Link
-              to={`/users/${data.user.id}`}
-              className="font-medium text-gray-900"
-            >
-              {data.user.username}
-            </Link>
+  if (data) {
+    return (
+      <div className="relative flex items-start space-x-3 p-2 sm:p-4">
+        <div className="relative">
+          <Link to={`/users/${data.user.id}`}>
+            <img
+              className={classNames(
+                data ? "" : "animate-pulse",
+                "h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white",
+              )}
+              src={getAvatarUrl(
+                data.user.id,
+                data.user.avatar,
+                data.user.discriminator,
+              )}
+              alt=""
+            />
+          </Link>
+        </div>
+        <div className="min-w-0 flex-1">
+          <div>
+            <div className="text-sm">
+              <Link
+                to={`/users/${data.user.id}`}
+                className="font-medium text-gray-900"
+              >
+                {data.user.username}
+              </Link>
+            </div>
+            <p className="mt-0.5 text-sm text-gray-500">
+              Commented {moment(published).fromNow()}
+            </p>
           </div>
-          <p className="mt-0.5 text-sm text-gray-500">
-            Commented {moment(published).fromNow()}
-          </p>
-        </div>
-        <div className="mt-2 text-sm text-gray-700">
-          <p>{content}</p>
+          <div className="mt-2 text-sm text-gray-700">
+            <p>{content}</p>
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
+  return <></>
 }
 
 interface CommentInputProps {

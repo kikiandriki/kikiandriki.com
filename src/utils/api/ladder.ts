@@ -26,6 +26,7 @@ interface MessageStats {
 interface EmoteEntry {
   emoteId: string
   count: number
+  animated?: boolean
 }
 
 /**

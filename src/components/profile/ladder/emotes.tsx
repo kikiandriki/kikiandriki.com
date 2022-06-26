@@ -19,18 +19,28 @@ export function EmoteShowcase({ userId }: EmoteShowcaseProps) {
                 style={{ maxWidth: "40px" }}
                 className="border-b-2 pb-1.5 border-gray-300 hover:border-red-500 transition-colors"
               >
-                <object
-                  data={`https://cdn.discordapp.com/emojis/${emote.emoteId}.gif`}
-                  type="image/gif"
-                  className="rounded"
-                  style={{ maxWidth: "40px" }}
-                >
+                {emote.animated === undefined ? (
+                  <object
+                    data={`https://cdn.discordapp.com/emojis/${emote.emoteId}.gif`}
+                    type="image/gif"
+                    className="rounded"
+                    style={{ maxWidth: "40px" }}
+                  >
+                    <img
+                      src={`https://cdn.discordapp.com/emojis/${emote.emoteId}.png`}
+                      className="rounded"
+                      style={{ maxWidth: "40px" }}
+                    />
+                  </object>
+                ) : (
                   <img
-                    src={`https://cdn.discordapp.com/emojis/${emote.emoteId}.png`}
+                    src={`https://cdn.discordapp.com/emojis/${emote.emoteId}.${
+                      emote.animated ? "gif" : "png"
+                    }`}
                     className="rounded"
                     style={{ maxWidth: "40px" }}
                   />
-                </object>
+                )}
               </div>
             ))}
           </div>
