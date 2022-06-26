@@ -6,7 +6,7 @@ interface EmoteShowcaseProps {
 export function EmoteShowcase({ userId }: EmoteShowcaseProps) {
   const { data } = useEmoteShowcase(userId)
   return (
-    <div className="px-2 sm:px-4 py-2 sm:py-4 bg-white shadow rounded-lg">
+    <div className="px-4 py-2 py-4 bg-white shadow rounded-lg">
       <h3 className="text-sm font-medium text-gray-500 truncate mb-3">
         Top emotes
       </h3>
