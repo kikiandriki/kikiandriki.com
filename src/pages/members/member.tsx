@@ -7,12 +7,13 @@ import { useParams } from "react-router-dom"
 
 // Component imports.
 import { Loading } from "@components/utility"
-import { LadderProfile } from "@components/profile/ladder"
+import { MessageStats } from "@components/profile/ladder"
 import { GuestbookComments } from "@components/profile/guestbook"
 
 // Utility imports.
 import { useMember } from "@utils/api/disque"
 import { getAvatarUrl } from "@utils/discord"
+import { EmoteShowcase } from "@components/profile/ladder/emotes"
 
 export default function Member() {
   const { userId } = useParams<{ userId: string }>()
@@ -54,7 +55,10 @@ export default function Member() {
           </span>
         </div>
         <div className="py-4 px-4 text-gray-700">
-          <LadderProfile userId={data.user.id} />
+          <MessageStats userId={data.user.id} />
+        </div>
+        <div className="py-4 px-4 text-gray-700">
+          <EmoteShowcase userId={data.user.id} />
         </div>
         <div className="py-4 px-4 text-gray-700">
           <GuestbookComments userId={data.user.id} />

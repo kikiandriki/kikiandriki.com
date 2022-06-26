@@ -2,13 +2,13 @@
  * Ladder profile component.
  */
 
-import { useLadderStats } from "@utils/api/ladder"
+import { useMessageStats } from "@utils/api/ladder"
 
-interface LadderProfileProps {
+interface MessageStatsProps {
   userId: string
 }
-export function LadderProfile({ userId }: LadderProfileProps) {
-  const { data, isLoading } = useLadderStats(userId)
+export function MessageStats({ userId }: MessageStatsProps) {
+  const { data, isLoading } = useMessageStats(userId)
   if (isLoading) {
     return <p>Loading...</p>
   }

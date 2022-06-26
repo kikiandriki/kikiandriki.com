@@ -15,7 +15,7 @@ export const ladder = axiosBase.create({
   },
 })
 
-interface LadderStats {
+interface MessageStats {
   rank?: number
   count: {
     all: number
@@ -23,14 +23,35 @@ interface LadderStats {
   }
 }
 
+interface EmoteEntry {
+  emoteId: string
+  count: number
+}
+
+/**
+ * Hook to get emote showcase.
+ */
+export function useEmoteShowcase(userId: string) {
+  const { getAccessTokenSilently } = useAuth0()
+  return useQuery(`ladder-emotes-${userId}`, async () => {
+    const token = await getAccessTokenSilently()
+    const response = await ladder.get<EmoteEntry[]>(`/emotes/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return response.data
+  })
+}
+
 /**
  * Hook to get user ladder stats.
  */
-export function useLadderStats(userId: string) {
+export function useMessageStats(userId: string) {
   const { getAccessTokenSilently } = useAuth0()
   return useQuery(`ladder-${userId}`, async () => {
     const token = await getAccessTokenSilently()
-    const response = await ladder.get<LadderStats>(`/messages/${userId}`, {
+    const response = await ladder.get<MessageStats>(`/messages/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
