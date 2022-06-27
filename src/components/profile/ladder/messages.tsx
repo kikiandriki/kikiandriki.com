@@ -10,7 +10,24 @@ interface MessageStatsProps {
 export function MessageStats({ userId }: MessageStatsProps) {
   const { data, isLoading } = useMessageStats(userId)
   if (isLoading) {
-    return <p>Loading...</p>
+    return (
+      <div className="animate-pulse">
+        <dl className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+          <div className="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
+            <div className="h-5 rounded bg-slate-300 w-12" />
+            <div className="mt-2.5 mb-1.5 h-6 rounded bg-red-300 w-16" />
+          </div>
+          <div className="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
+            <div className="h-5 rounded bg-slate-300 w-24" />
+            <div className="mt-2.5 mb-1.5 h-6 rounded bg-red-300 w-16" />
+          </div>
+          <div className="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
+            <div className="h-5 rounded bg-slate-300 w-26" />
+            <div className="mt-2.5 mb-1.5 h-6 rounded bg-red-300 w-10" />
+          </div>
+        </dl>
+      </div>
+    )
   }
   if (data) {
     return (
